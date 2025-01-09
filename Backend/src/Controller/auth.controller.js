@@ -2,7 +2,7 @@ const express = require("express");
 const User = require("../Models/user.model");
 const bcrypt = require("bcryptjs");
 const { generateToken } = require("../Lib/utilities");
-const { cloudinary_js_config } = require("../Lib/cloudinary");
+const cloudinary = require("../Lib/cloudinary");
 module.exports = {
   Signup: async (req, res) => {
     const { fullName, email, password } = req.body;
@@ -82,7 +82,7 @@ module.exports = {
         if(!profilePic){
             return res.status(400).json({ message: "ProfilePic is not Provided" });
         }
-        const uploadResponse = await cloudinary_js_config.uploader.upload(profilePic)
+        const uploadResponse = await cloudinary.uploader.upload(profilePic)
         const updateUser = await User.findByIdAndUpdate(userId, {profilePic:uploadResponse.secure_url}, {new: true});
         res.status(200).json(updateUser); 
     } catch (error) {
