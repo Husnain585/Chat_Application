@@ -11,6 +11,7 @@ import { Toaster } from "react-hot-toast";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { useAuthStore } from "./store/useAuthStore";
 import { useEffect } from "react";
+import ErrorPage from "./pages/ErrorPage";
 
 
 export default function App() {
@@ -33,6 +34,7 @@ export default function App() {
               <Route path="/signup" element={!AuthUser ?  <SignupPage /> : <Navigate to="/" /> } />
               <Route path="/login" element={!AuthUser ?<LoginPage /> : <Navigate to="/" />} />
               <Route path="/settings" element={<SettingsPage /> } />
+              <Route path="/Error Page" element={<ErrorPage /> } />
               <Route path="/profile" element={AuthUser ?  <ProfilePage /> : <Navigate to="/login" /> } />
             </Routes>
           <Toaster />
